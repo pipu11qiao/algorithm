@@ -13,7 +13,8 @@ function getData(xNum) {
 
 function printBinaryArr(arr) {
     arr.forEach(item => {
-        console.log(item.join(','));
+        console.log(item.map(sub => `    ${sub}`.slice(-3)).join(' '));
+        console.log('')
     })
 }
 
