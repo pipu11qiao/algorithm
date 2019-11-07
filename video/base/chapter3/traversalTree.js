@@ -91,9 +91,9 @@ function levelOrder(node) {
         return;
     }
     queue.push(node);
-    let level = 1;
+    // let level = 1;
     while (queue.length > 0) {
-        console.log('level', level++);
+        // console.log('level', level++);
         let len = queue.length;
         while (len-- > 0) {
             const parentNode = queue.shift();
@@ -130,5 +130,6 @@ module.exports = {
     preOrderRecur,
     inOrderRecur,
     posOrderRecur,
+    levelOrder,
 };
 
