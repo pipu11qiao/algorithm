@@ -21,7 +21,7 @@ class DogCatQueue {
 
     pollAll() {
         while (this.dogData.length > 0 && this.dogData.length > 0) {
-            const animal = this.[this.dogData[0].num > this.catData[0].num ? 'catData' : 'dogData'].unshift();
+            const animal = this[this.dogData[0].num > this.catData[0].num ? 'catData' : 'dogData'].unshift();
             console.log(animal);
         }
         this.pollDog();
