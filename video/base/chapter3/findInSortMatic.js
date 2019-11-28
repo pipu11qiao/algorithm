@@ -24,6 +24,7 @@ function getData(xNum, yNum) {
     }
     return arr;
 }
+
 function printBinaryArr(arr, len = 2) {
     arr.forEach(item => {
         console.log(item.map(sub => `    ${sub}`.slice(-len)).join(' '));
@@ -34,23 +35,18 @@ function printBinaryArr(arr, len = 2) {
 }
 
 function findNumInSortMatrix(arr, num) {
-    const endR = arr.length - 1;
-    const endC = arr[0].length - 1;
-    if (arr[endR][endC] < num) {
-        return false;
+    let r = 0;
+    let c = arr[0].length - 1;
+    while (c > -1 || r < arr.length) {
+        if (arr[r][c] === num) {
+            return {r, c}
+        } else if (arr[r][c] > num) {
+            c--
+        } else {
+            r++
+        }
     }
-    // 包含num的最小范围
-    let c = endC;
-    while (c >= 0 && arr[endR][c] >= num) {
-        c--
-    }
-    c++
-    let r = endR;
-    while (r >= 0 && arr[r][endC] >= num) {
-        r--
-    }
-    r++
-    console.log(`r: ${r}, c: ${c},arr[r][c]:  ${arr[r][c]}`);
+    return false;
 }
 
 const arr = getData(4, 6);

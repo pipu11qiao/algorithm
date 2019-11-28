@@ -8,7 +8,7 @@ const util = require('./util');
 const {createDyadicArray, printDyadicArray} = util;
 
 let num = 0;
-const arr = createDyadicArray(4, 6, () => (`  ${++num}`.slice(-3)));
+const arr = createDyadicArray(4, 6, () => ++num);
 printDyadicArray(arr);
 
 // 斜线上方坐标和斜线下方坐标
@@ -49,6 +49,7 @@ const testArr = [
     [13, 14, 15, 16, 17, 18],
     [19, 20, 21, 22, 23, 24],
 ];
-printZigZag(testArr);
+
+// printZigZag(testArr);
 
 // printSkew(arr, 1, 5, 3, 5, 1);
