@@ -6,12 +6,6 @@ var maxProduct = function (nums) {
   const len = nums.length;
   const resArr = [];
 
-  // {
-  //   s:1, 乘积
-  //   max: Number.NEGATIVE_INFINITY, 当前最大值
-  //   negIndex: -1 // 乘积中包含的第一个负数的index
-  // }
-
   let s = 1;
   let max = Number.NEGATIVE_INFINITY;
   let negIndex = -1;
@@ -34,7 +28,6 @@ var maxProduct = function (nums) {
         } else {
           max = Math.max(max, s, num);
           if (negIndex > -1) {
-            console.log(`negIndex`, negIndex);
             max = Math.max(max, s / resArr[negIndex].s)
           }
         }
@@ -49,9 +42,15 @@ var maxProduct = function (nums) {
       negIndex
     })
   }
-  console.log(`resArr`, resArr);
+  // console.log(`resArr`, resArr);
   return max
 };
+
+// {
+//   s:1, 乘积
+//   max: Number.NEGATIVE_INFINITY, 当前最大值
+//   negIndex: -1 // 乘积中包含的第一个负数的index
+// }
 
 function test() {
   let arr = [2, 3, -2, 0, 4, 2, -1];
