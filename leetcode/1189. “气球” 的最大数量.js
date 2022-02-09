@@ -11,7 +11,6 @@ var maxNumberOfBalloons = function (text) {
     }
     map[text[i]]++
   }
-  // console.log(`map`, map);
   return Math.floor(Math.min(map.b || 0, map.a || 0, map.n || 0, (map.l || 0) / 2, (map.o || 0) / 2))
 };
 
