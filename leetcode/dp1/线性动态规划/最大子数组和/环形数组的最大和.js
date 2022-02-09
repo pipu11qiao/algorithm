@@ -3,32 +3,26 @@
  * @return {number}
  */
 
-
-var maxSubArray = function (nums, start, end) {
-  const len = end - start + 1;
-  let s = 0;
-  let max = Number.NEGATIVE_INFINITY;
-  for (let i = start; i < len; i++) {
-    const num = nums[i]
-    if (s <= 0) {
-      s = num
-      max = Math.max(max, num)
-    } else {
-      s = s + num
-      max = Math.max(max, s)
-    }
-  }
-  console.log(`max`, max);
-  return max
-};
 var maxSubarraySumCircular = function (nums) {
-  const tmpArr = [...nums, ...nums];
-  const len = nums.length;
-  let max = Number.NEGATIVE_INFINITY;
+  const len = nums.len;
+  const resMax = Number.NEGATIVE_INFINITY;
+  let s = 0;
+  // 求出区间[0,i] 的最大字间距和
   for (let i = 0; i < len; i++) {
-    max = Math.max(max, maxSubArray(tmpArr, i, len - 1 + i));
+    s = nums[i] + Math.max(s, 0)
+    resMax = Math.max(resMax, s)
   }
-  return max
+
+  // 左侧到i的和 区间[0,i]的和
+  const leftSum = [];
+  s = 0;
+  for (let i = 0; i < len; i++) {
+    s =s + nums[i];
+    leftSum.push(s);
+  }
+
+
+  return resMax
 };
 
 function test() {
