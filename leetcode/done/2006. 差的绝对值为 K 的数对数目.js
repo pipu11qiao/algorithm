@@ -29,8 +29,6 @@ var countKDifference = function (nums, k) {
       record[numS + '+'] = 1
     }
   }
-  console.log(`map`, map);
-  console.log(`record`, record);
   return res
 };
 

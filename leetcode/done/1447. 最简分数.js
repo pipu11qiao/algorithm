@@ -17,7 +17,6 @@ var simplifiedFractions = function (n) {
   for (let num = 2; num <= n; num++) {
     const isEven = num % 2 == 0;
     for (let molecule = 1; molecule < num; molecule += isEven ? 2 : 1) {
-      console.log(`molecule, num`, molecule, num);
       if (check(molecule, num)) {
         arr.push(`${molecule}/${num}`)
       }
