@@ -40,24 +40,41 @@ var shortestWay = function (source, target) {
   }
   // 所有字母都有
   const shortIndexMap = {}; // '0-1' 最小数量
-  const shortMapArr = [];
   let res = 0;
   for (let i = 0; i < len; i++) {
-    const curMap = {};
-    const curRes = {
-      count: 1,
-      mapArr: [],
-    }
     for (let j = i; j < len; j++) {
+      const curRes = {
+        count: 1,
+        mapArr: [],
+      }
       const curLetter = target[j]
-      if (j >= i) {
+      if (j > i) {
         let prev = j - 1;
+        let curMapArr = [];
+        let prevStateObj = shortIndexMap[`${i}-${prev}`];
+        let prevMapArr = prevStateObj.mapArr;
+
+        prevMapArr.forEach(prevObj => {
+          if (prevObj[curLetter]) {
+            curMapArr.push(prevObj[curLetter])
+          }
+        })
+        if (curMapArr.length === 0) {
+          curRes.count += prevStateObj.count + 1
+          curRes.mapArr = allMap[curLetter];
+
+        } else {
+          curRes.count += prevStateObj.count;
+          curRes.mapArr = curMapArr;
+        }
+
       } else {
         curRes.mapArr = allMap[curLetter]
       }
       shortIndexMap[`${i}-${j}`] = curRes;
     }
   }
+  console.log(`shortIndexMap`, shortIndexMap);
 };
 function test() {
   let fun = shortestWay;
