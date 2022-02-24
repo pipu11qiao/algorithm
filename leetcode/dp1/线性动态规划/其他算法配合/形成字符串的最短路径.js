@@ -40,8 +40,24 @@ var shortestWay = function (source, target) {
   }
   // 所有字母都有
   const shortIndexMap = {}; // '0-1' 最小数量
-  const shortLetterMap  = {}; // 已经计算的字符串最短的数量
-
+  const shortMapArr = [];
+  let res = 0;
+  for (let i = 0; i < len; i++) {
+    const curMap = {};
+    const curRes = {
+      count: 1,
+      mapArr: [],
+    }
+    for (let j = i; j < len; j++) {
+      const curLetter = target[j]
+      if (j >= i) {
+        let prev = j - 1;
+      } else {
+        curRes.mapArr = allMap[curLetter]
+      }
+      shortIndexMap[`${i}-${j}`] = curRes;
+    }
+  }
 };
 function test() {
   let fun = shortestWay;
