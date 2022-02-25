@@ -28,14 +28,14 @@ var longestArithSeqLength = function (nums) {
       }
     }
   }
-    return maxLen + 2
+  return maxLen + 2
 };
 function test() {
   let fun = longestArithSeqLength;
   let params = [
     // [3, 6, 9, 12]
     // [9,4,7,2,10]
-    [20,1,15,3,10,5,8]
+    [20, 1, 15, 3, 10, 5, 8]
   ];
 
   const res = fun.apply(null, params)
