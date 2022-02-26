@@ -5,50 +5,39 @@
 var longestValidParentheses = function (str) {
   let res = 0;;
   let len = str.length;
-  let s = -1;
-  let lastS = -1;
-  let e = 0;
+  let dp = {
+
+  };
   let c = 0;
   for (let i = 0; i < len; i++) {
 
     if (str[i] === '(') {
       c++
-      if (s === -1) {
-        s = i;
-        e = i;
-      }
-      if (lastS === -1) {
-        lastS = i;
-      }
-
-
+      dp[i] = null
     } else {
-      if (c > 0) {
-        e = i
-      }
       c--
-      if (c === 0 && s > -1) {
-        lastS = -1;
-        const count = e - s + 1 - c
-        if (count > res) {
-          res = count
-        }
-      }
-      if (c > 0 && i === len - 1) {
-        const count = e - lastS + 1 - c
-        if (count > res) {
-          res = count
-        }
-      }
       if (c < 0) {
-        s = -1
-        e = -1
         c = 0
+        dp[i] = null
+      } else {
+        let prevObj = dp[i - 1];
+        let g = null;
+        if (prevObj) {
+          g = [prevObj[0] - 1, i]
+        } else {
+          g = [i - 1, i]
+        }
+        if (g[0] - 1 >= 0 && dp[g[0] - 1]) {
+          g = [dp[g[0] - 1][0], i]
+        }
+        res = Math.max(g[1] - g[0] + 1, res)
+        dp[i] = g
       }
     }
-  }
+  };
+  // console.log(`dp`, dp);
   return res
-};
+}
 function test() {
   let fun = longestValidParentheses;
   let params = [
