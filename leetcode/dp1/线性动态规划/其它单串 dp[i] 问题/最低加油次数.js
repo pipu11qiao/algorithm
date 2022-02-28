@@ -5,47 +5,48 @@
  * @return {number}
  */
 var minRefuelStops = function (target, startFuel, stations) {
-  let curGroup = [{
-    step: 0,
-    distance: startFuel
-  }]; // constant
+  let curGroup = [startFuel]; // 表示第0步的最大距离
   if (target <= startFuel) {
     return 0
   }
-  let res = Number.POSITIVE_INFINITY;
+  let nextStep = 1;
   for (let i = 0; i < stations.length; i++) {
     let obj = stations[i];
-    const nextBaseGroup = [];
-    const nextAddGroup = [];
-    for (let j = 0; j < curGroup.length; j++) {
-      const groupObj = curGroup[j];
-      if (groupObj.distance >= obj[0]) {
-        nextBaseGroup.push(groupObj);
-        const nextDistance = groupObj.distance + obj[1]
-        if (nextDistance >= target) {
-          res = Math.min(res, groupObj.step + 1)
+    let hasGet = false;
+    const len = curGroup.length;
+    for (let j = len - 1; j >= 0; j--) {
+      const distance = curGroup[j];
+      if (distance >= obj[0]) {
+        hasGet = true
+        nextStep = j + 1
+        const nextDistance = distance + obj[1]
+        if (!curGroup[nextStep]) {
+          curGroup.push(nextDistance)
+        } else {
+          if (nextDistance > curGroup[nextStep]) {
+            curGroup[nextStep] = nextDistance
+          }
         }
-        nextAddGroup.push({
-          step: groupObj.step + 1,
-          distance: nextDistance
-        });
       }
     }
-    if (nextBaseGroup.length === 0) {
+    if (!hasGet) {
       return -1
     }
-    curGroup = [...nextBaseGroup, ...nextAddGroup];
   }
-  if (curGroup[curGroup.length - 1].distance < target) {
-
-    return -1;
+  for (let i = 0; i < curGroup.length; i++) {
+    if (curGroup[i] >= target) {
+      return i
+    }
   }
-  return res
+  return -1
 };
 function test() {
   let fun = minRefuelStops;
   let params = [
     // 1, 1, []
+    // 100, 1, []
+    // 200, 50, [[25, 25], [50, 100]]
+    // 200, 50, [[25, 25], [50, 100], [100, 100], [150, 40]]
     // 100, 1, [[10, 100], [20, 30]]
     // 100, 10, [[10, 60], [20, 30], [30, 30], [60, 40]]
     // 100, 50, [[50, 50]]
