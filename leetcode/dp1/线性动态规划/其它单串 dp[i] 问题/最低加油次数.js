@@ -5,33 +5,42 @@
  * @return {number}
  */
 var minRefuelStops = function (target, startFuel, stations) {
-  let step = 0;
-  let maxD = startFuel;
-  let nextMax = 0;
-  for (let i = -1; i <= stations.length; i++) {
-    if (maxD >= target) {
-      return step;
-    }
-    if (maxD + nextMax >= target) {
-      return step + 1;
-    }
+  let curGroup = [{
+    step: 0,
+    distance: startFuel
+  }]; // constant
+  if (target <= startFuel) {
+    return 0
+  }
+  let res = Number.POSITIVE_INFINITY;
+  for (let i = 0; i < stations.length; i++) {
     let obj = stations[i];
-    if (!obj) {
-      continue
-    }
-    if (obj[0] <= maxD) {
-      nextMax = Math.max(nextMax, obj[1])
-    } else {
-      if (obj[0] <= maxD + nextMax) {
-        maxD = maxD + nextMax
-        nextMax = obj[1];
-        step++
-      } else {
-        break
+    const nextBaseGroup = [];
+    const nextAddGroup = [];
+    for (let j = 0; j < curGroup.length; j++) {
+      const groupObj = curGroup[j];
+      if (groupObj.distance >= obj[0]) {
+        nextBaseGroup.push(groupObj);
+        const nextDistance = groupObj.distance + obj[1]
+        if (nextDistance >= target) {
+          res = Math.min(res, groupObj.step + 1)
+        }
+        nextAddGroup.push({
+          step: groupObj.step + 1,
+          distance: nextDistance
+        });
       }
     }
+    if (nextBaseGroup.length === 0) {
+      return -1
+    }
+    curGroup = [...nextBaseGroup, ...nextAddGroup];
   }
-  return -1;
+  if (curGroup[curGroup.length - 1].distance < target) {
+
+    return -1;
+  }
+  return res
 };
 function test() {
   let fun = minRefuelStops;
@@ -39,7 +48,10 @@ function test() {
     // 1, 1, []
     // 100, 1, [[10, 100], [20, 30]]
     // 100, 10, [[10, 60], [20, 30], [30, 30], [60, 40]]
-    100, 50, [[50, 50]]
+    // 100, 50, [[50, 50]]
+    // 100, 50, [[10, 10], [20, 10], [30, 30]]
+    // 1000, 83, [[47, 220], [65, 1], [98, 113], [126, 196], [186, 218], [320, 205], [686, 317], [707, 325], [754, 104], [781, 105]]
+    1000, 1, [[1, 186], [145, 161], [183, 43], [235, 196], [255, 169], [263, 200], [353, 161], [384, 190], [474, 44], [486, 43], [567, 48], [568, 96], [592, 36], [634, 181], [645, 167], [646, 69], [690, 52], [732, 28], [800, 42], [857, 55], [922, 63], [960, 141], [973, 13], [977, 112], [997, 162]]
   ];
 
 
