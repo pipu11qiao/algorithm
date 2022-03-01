@@ -15,7 +15,7 @@ var convert = function (s, numRows) {
   let cLen = numRows + (numRows - 2);
   for (let i = 0; i < len; i++) {
     let mod = i % cLen;
-    let rowNum = mod < numRows ? mod : (mod - numRows + 1);
+    let rowNum = mod < numRows ? mod : numRows - (mod % numRows) - 2;
     allArr[rowNum].push(s[i])
   }
   return allArr.reduce((s, arr) => s + arr.join(''), '');
