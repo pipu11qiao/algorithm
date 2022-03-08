@@ -17,3 +17,16 @@ const mid2 = mid+1; // 偶数个
 for(j=len-1;j>=i;j--){
 
 }
+
+#### 比较的时候类型的差异
+
+const  arr = [7,2,5,3,8,4,4,]
+const map={}
+arr.forEach(item=>{
+  if(map[item]===undefined){
+    map[item]=0
+  }
+  map[item]+=1
+});
+Object.keys(map).map(item=>Number(item))// 转换为数字
+new Set(arr) // 或者用set
