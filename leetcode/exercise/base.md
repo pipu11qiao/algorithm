@@ -30,3 +30,8 @@ arr.forEach(item=>{
 });
 Object.keys(map).map(item=>Number(item))// 转换为数字
 new Set(arr) // 或者用set
+
+
+#### 数组中两个元素下标表示的键可以用一个数字表示，类似于以len进制表示的二位数
+
+i,j -> i * len + j,每个数都是唯一的
