@@ -37,3 +37,6 @@ new Set(arr) // 或者用set
 i,j -> i * len + j,每个数都是唯一的
 
 #### 二叉树dfs
+
+#### num的第j位是不是1
+((num >> j) & 1) === 1

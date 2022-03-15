@@ -59,8 +59,12 @@ function test() {
     // [1, 1, 2]
     // [2, 2, 1, 3]
     // v
-    [4, 4, 4, 1]
+    // [4, 4, 4, 1]
+    [4, 4, 5, 5, 6, 6, 7, 8]
   ];
+  let c = 8;
+  console.log(Math.pow(2, 8));
+  console.log(1 << 8);
 
 
   const res = fun.apply(null, params)
