@@ -31,9 +31,11 @@ var levelOrder = function (root) {
   }
   const nodeLevelMap = pre(root)
   let res = [];
-  return Object.keys(nodeLevelMap).sort((a, b) => a - b).forEach(index =>
+  Object.keys(nodeLevelMap).sort((a, b) => a - b).forEach(index =>
     res = [...res, ...nodeLevelMap[index]]
   )
+  return res
+
 };
 
 function test() {
