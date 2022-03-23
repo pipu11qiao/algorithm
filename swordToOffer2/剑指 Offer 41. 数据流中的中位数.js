@@ -41,12 +41,8 @@ var MedianFinder = function () {
  * @return {void}
  */
 MedianFinder.prototype.addNum = function (num) {
-  console.log(`this.arr`, this.arr);
   const index = findIndex(this.arr, num)
-  console.log(`this.arr`, this.arr);
-  console.log(`index`, index);
   this.arr.splice(index, 0, num)
-  console.log(`this.arr`, this.arr);
 };
 
 /**
@@ -54,9 +50,7 @@ MedianFinder.prototype.addNum = function (num) {
  */
 MedianFinder.prototype.findMedian = function () {
   const len = this.arr.length
-  console.log(`len`, len);
   let mid = Math.floor((len - 1) / 2)
-  console.log(`mid`, mid);
   if (len % 2 !== 0) {
     return this.arr[mid]
   } else {
@@ -76,7 +70,6 @@ var obj = new MedianFinder()
 obj.addNum(10)
 obj.addNum(9)
 median = obj.findMedian()
-console.log(`median`, median);
 obj.addNum(6)
 median = obj.findMedian()
 console.log(`median`, median);
