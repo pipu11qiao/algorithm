@@ -5,8 +5,14 @@ function getCountOfN(n, prev) {
       return 1
     }
     const count = n - 1;
+    console.log(`count`, count);
     for (let i = count; i >= 0; i--) {
-      res += Math.pow(10, i) * 8 * Math.pow(9, count - i - 1)
+      if (i === count) {
+        res += Math.pow(10, i)
+      } else {
+        res += 8 * Math.pow(10, i) * Math.pow(9, count - i - 1 >= 0 ? count - i - 1 : 0)
+      }
+      console.log(`res`, res);
     }
   } else if (prev === '1') {
     res = Math.pow(10, n)
@@ -35,6 +41,9 @@ function test() {
 
   const res = fun.apply(null, params)
   console.log(`res`, res);
-  console.log(getCountOfN(3));
+  // console.log(getCountOfN(3));
+  // console.log(`getCountOfN(2,'0')`, getCountOfN(2, '0'));
+  // console.log(`getCountOfN(3,'0')`, getCountOfN(3, '0'));
+  console.log(`getCountOfN(4,'0')`, getCountOfN(4, '0'));
 }
 test()
