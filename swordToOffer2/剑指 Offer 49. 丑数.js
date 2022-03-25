@@ -4,7 +4,7 @@
  */
 var nthUglyNumber = function (n) {
   let resArr = [1];
-  const cur = 1
+  let cur = 1
   const indexMap = [
     {
       type: 2,
@@ -19,17 +19,25 @@ var nthUglyNumber = function (n) {
       index: -1,
     },
   ]
-  const map = { 1: 1 };
   for (let i = 2; i <= n; i++) {
-    debugger;
-    const nextArr = indexMap.map(item => ({
-      ...item,
-      val: item.type * resArr[item.index + 1]
-    })).sort((a, b) => a.val - b.val)
-    const { val, type } = nextArr[0];
-    const nextNum = val;
-    indexMap[type === 2 ? 0 : type === 3 ? 1 : 2].index++
-    resArr.push(nextNum);
+    const nextArr = indexMap.map(item => {
+      const { index, type } = item;
+      let curIndex = index + 1;
+      let val = type * resArr[curIndex]
+      while (val <= cur) {
+        curIndex++
+        val = type * resArr[curIndex]
+      }
+      return {
+        ...item,
+        index: curIndex,
+        val,
+      }
+    }).sort((a, b) => a.val - b.val)
+    const { val, type, index } = nextArr[0];
+    cur = val;
+    indexMap[type === 2 ? 0 : type === 3 ? 1 : 2].index = index
+    resArr.push(cur);
   }
   const len = resArr.length;
   return resArr[len - 1]
