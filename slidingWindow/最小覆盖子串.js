@@ -8,7 +8,7 @@ var minWindow = function (s, t) {
   const mapT = {};
   const missMapT = {};
   const mapS = {};
-  let missCuont = 0;
+  let missCount = 0;
   for (let i = 0; i < t.length; i++) {
     const curLetter = t[i];
     if (!mapT[curLetter]) {
@@ -17,11 +17,13 @@ var minWindow = function (s, t) {
     }
     mapT[curLetter]++
     missMapT[curLetter]++
-    missCuont++
+    missCount++
   }
   let end = 0;
+  let min = Number.POSITIVE_INFINITY;
+  let str = '';
   for (let i = 0; i < s.length; i++) {
-    const curLetter = t[i];
+    const curLetter = s[i];
     if (mapT[curLetter]) {
       if (!mapS[curLetter]) {
         mapS[curLetter] = 0;
@@ -29,14 +31,36 @@ var minWindow = function (s, t) {
       mapS[curLetter]++
       if (missMapT[curLetter] > 0) {
         missMapT[curLetter]--
-        missCuont--
+        missCount--
       }
-      if (missCuont === 0) { //有完成的了
-
+      if (missCount === 0) { //有完成的了 找到当前满足的最短字符，记录
+        for (; end < i;) {
+          const prevLetter = s[end];
+          if (mapT[prevLetter]) {
+            if (mapS[prevLetter] > mapT[prevLetter]) {
+              mapS[prevLetter]--
+              end++
+            } else {
+              break
+            }
+          } else {
+            end++
+          }
+        }
+        const curLen = i - end + 1
+        if (curLen < min) {
+          min = curLen;
+          str = s.slice(end, i + 1)
+        }
+        missMapT[s[end]] = 1;
+        mapS[s[end]]--
+        end++;
+        missCount = 1;
       }
     }
-  }
-};
+  };
+  return str
+}
 
 function test() {
   let fun = minWindow;
