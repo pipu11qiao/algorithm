@@ -6,61 +6,42 @@
 
 var minWindow = function (s, t) {
   const mapT = {};
-  let count  =0
+  const missMapT = {};
+  const mapS = {};
+  let missCuont = 0;
   for (let i = 0; i < t.length; i++) {
     const curLetter = t[i];
-    if (mapT[curLetter] === undefined) {
-      mapT[curLetter] = 0
+    if (!mapT[curLetter]) {
+      mapT[curLetter] = 0;
+      missMapT[curLetter] = 0;
     }
     mapT[curLetter]++
+    missMapT[curLetter]++
+    missCuont++
   }
-  const mapS = {};
-  let i = 0;
-  let end = -1;
-  let res = '';
-  let min = Number.POSITIVE_INFINITY;
-  let missLeterr = '';
-  for (; i < s.length; i++) {
-    const curLetter = s[i];
+  let end = 0;
+  for (let i = 0; i < s.length; i++) {
+    const curLetter = t[i];
     if (mapT[curLetter]) {
-      if (end === -1) {
-        end = i;
-      }
       if (!mapS[curLetter]) {
-        mapS[curLetter] == 0
+        mapS[curLetter] = 0;
       }
       mapS[curLetter]++
-      if (Object.keys(mapT).every(key => mapS[key] >= mapT[key])) {
-        for (; end < i; end++) {
-          const prevLetter = s[end];
-          if (mapT[prevLetter]) {
-            if (mapS[prevLetter] === mapT[prevLetter]) {
-              missLeterr = prevLetter;
-              min = i - end + 1
-              res = s.slice(end, i + 1);
-              end++
-              mapS[prevLetter]--
-              break
-            }
-            mapS[prevLetter]--
-          }
-        }
+      if (missMapT[curLetter] > 0) {
+        missMapT[curLetter]--
+        missCuont--
       }
-      break
+      if (missCuont === 0) { //有完成的了
+
+      }
     }
   }
-}
-for (; i < s.length; i++) {
-
-  const curLetter = s[i];
-}
-
 };
 
 function test() {
   let fun = minWindow;
   let params = [
-    [1, 1, 1, 0]
+    "ADOBECODEBANC", "ABC"
   ];
 
   const res = fun.apply(null, params)
