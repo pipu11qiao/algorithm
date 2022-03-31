@@ -1,14 +1,14 @@
 /**
  * @param {string} s
- * @param {number} k
- * @return {number}
+ * @param {string} p
+ * @return {number[]}
  */
-var characterReplacement = function (s, k) {
+var findAnagrams = function (s, p) {
 
 };
 
 function test() {
-  let fun = characterReplacement;
+  let fun = findAnagrams;
   let params = [
     [1, 1, 1, 0]
   ];
