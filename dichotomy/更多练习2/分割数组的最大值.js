@@ -21,6 +21,9 @@ var splitArray = function (nums, m) {
         let min = Number.POSITIVE_INFINITY;
         for (let m = i; m >= j - 1; m--) {
           let lastSum = sumArr[i] - sumArr[m - 1];
+          if (lastSum > min) {
+            break
+          }
           const curRes = Math.max(lastSum, dp[`${m - 1}-${j - 1}`]);
           min = Math.min(curRes, min)
         }
