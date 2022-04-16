@@ -17,7 +17,7 @@ var minAvailableDuration = function (slots1, slots2, duration) {
   slots2.sort((a, b) => a[1] - b[1])
   let m = 0;
   let n = 0;
-  debugger
+  // debugger
   while (m < slots1.length && n < slots2.length) {
     let timeRange = getTime(slots1[m], slots2[n]);
     let time = timeRange[1] - timeRange[0];

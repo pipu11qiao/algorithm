@@ -20,33 +20,54 @@ var trap = function (arr) {
       }
     }
   }
-  let h = hArr[0];
-  let left = 0;
   let max = Number.NEGATIVE_INFINITY;
   let maxIndex = -1;
   for (let i = 0; i < hArr.length; i++) {
-    if (hArr[i] > max) {
-      max = hArr[i]
+    if (arr[hArr[i]] > max) {
+      max = arr[hArr[i]]
       maxIndex = i
     }
   }
+  let left = 0;
   let right = 0;
-  let curMax = -1
-  while (right < maxIndex) {
-    const curNum = arr[right];
-    if(curNum>curMax){
-
+  let res = 0;
+  // debugger
+  while (right <= maxIndex) {
+    const curNum = arr[hArr[right]];
+    const prevNum = arr[hArr[left]]
+    if (curNum >= prevNum) {
+      const curMaxH = prevNum
+      for (let m = hArr[left]; m <= hArr[right]; m++) {
+        const curH = curMaxH - arr[m];
+        res += curH > 0 ? curH : 0
+      }
+      left = right
     }
-
+    right++
   }
-
-  debugger
+  left = hArr.length - 1;
+  right = hArr.length - 1;
+  while (left >= maxIndex) {
+    const curNum = arr[hArr[left]];
+    const prevNum = arr[hArr[right]]
+    if (curNum >= prevNum) {
+      const curMaxH = prevNum
+      for (let m = hArr[left]; m <= hArr[right]; m++) {
+        const curH = curMaxH - arr[m];
+        res += curH > 0 ? curH : 0
+      }
+      right = left
+    }
+    left--
+  }
+  return res
 };
 
 function test() {
   let fun = trap;
   let params = [
-    [4, 2, 0, 3, 2, 5]
+    // [4, 2, 0, 3, 2, 5]
+    [0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1]
     // [0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1]
   ];
 
