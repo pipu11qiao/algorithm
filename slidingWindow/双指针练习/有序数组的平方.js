@@ -1,5 +1,3 @@
-const e = require("express");
-
 /**
  * @param {number[]} nums
  * @return {number[]}
