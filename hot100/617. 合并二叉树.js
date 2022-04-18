@@ -11,6 +11,19 @@
  * @param {TreeNode} root2
  * @return {TreeNode}
  */
- var mergeTrees = function(root1, root2) {
-
+var mergeTrees = function (root1, root2) {
+  if (!root1 && !root2) {
+    return null
+  }
+  let node = root1;
+  if (node) {
+    if (root2) {
+      node.val = node.val + root2.val;
+      node.left = mergeTrees(root1.left, root2.left);
+      node.right = mergeTrees(root1.right, root2.right);
+    }
+  } else {
+    node = root2
+  }
+  return node;
 };
