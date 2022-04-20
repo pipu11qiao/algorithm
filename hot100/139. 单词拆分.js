@@ -20,20 +20,20 @@ var wordBreak = function (s, wordDict) {
     min = Math.min(curWord.length, min)
     max = Math.max(curWord.length, max)
   }
-
-  function check(index) {
-    if (index === -1) {
-      return true
-    }
+  let dp = {
+    '-1': 1
+  };
+  for (let i = 0; i < s.length; i++) {
+    let index = i;
     for (let l = index - min + 1; l >= index - max + 1 && l >= 0; l--) {
       const tmpWord = s.slice(l, index + 1);
-      if (map[tmpWord] && check(l - 1)) {
-        return true
+      if (map[tmpWord] && dp[l - 1]) {
+        dp[index] = true
+        break
       }
     }
-    return false
   }
-  return check(s.length - 1)
+  return !!dp[s.length - 1];
 };
 // @lc code=end
 
