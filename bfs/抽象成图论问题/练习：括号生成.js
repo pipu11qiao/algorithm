@@ -12,7 +12,6 @@ function test() {
     [1, 1, 1, 0]
   ];
 
-
   const res = fun.apply(null, params)
   console.log(`res`, res);
 }
