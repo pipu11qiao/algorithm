@@ -42,7 +42,7 @@ var isMatch = function (s, p) {
       }
     }
   }
-  console.log(`dp`, dp);
+  // console.log(`dp`, dp);
   return !!dp[mLen][nLen];
 };
 
